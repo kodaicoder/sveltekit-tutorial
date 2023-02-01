@@ -6,10 +6,9 @@
 	export let data;
 	/** @type {import('./$types').ActionData} */
 	export let form;
-	console.log(form);
 
 	let formErrors = {};
-	let todosList = data.todos;
+	$: todosList = data.todos;
 
 	const onCreateSubmit = async ({ form, data, action, cancel }) => {
 		////! Before form submitted
@@ -34,7 +33,6 @@
 			cancel();
 			const { fieldErrors: errors } = err.flatten();
 			formErrors = { ...formErrors, ...errors };
-			return false;
 		}
 
 		if (!!todosList) {
@@ -42,7 +40,6 @@
 				cancel();
 				const errors = { title: ['Title for todo must be unique.'] };
 				formErrors = { ...formErrors, ...errors };
-				return false;
 			}
 		}
 
