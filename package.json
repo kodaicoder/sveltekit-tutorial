@@ -29,7 +29,8 @@
   "dependencies": {
     "@prisma/client": "^4.9.0",
     "axios": "^1.2.6",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "zod": "^3.20.2"
   },
   "description": "Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).",
   "main": "svelte.config.js",
