@@ -1,5 +1,5 @@
 import * as _todos from '$lib/server/_todos.js';
-import { fail } from '@sveltejs/kit';
+import { fail, redirect } from '@sveltejs/kit';
 import crypto from 'crypto';
 import * as validator from '$lib/zod/validator.js';
 
@@ -7,11 +7,18 @@ import * as validator from '$lib/zod/validator.js';
 export async function load({ cookies }) {
 	const id = cookies.get('userid');
 	if (!id) {
-		cookies.set('userid', crypto.randomUUID(), { path: '/' });
+		cookies.set('userid', crypto.randomUUID(), {
+			path: '/',
+			httpOnly: true,
+			sameSite: 'strict',
+			secure: false,
+			maxAge: 60 * 60 * 24 * 30
+		});
 	}
 	try {
 		const response = (await _todos.getTodos(id)) ?? [];
 		return {
+			userid: id,
 			todos: response
 		};
 	} catch (error) {
@@ -27,7 +34,8 @@ export const actions = {
 	create: async ({ cookies, request }) => {
 		console.log('SERVER SIDE HIT!!');
 		const data = await request.formData();
-		const formData = Object.fromEntries(data);
+		const userid = cookies.get('userid');
+		const title = data.get('title');
 
 		//!server side validation
 		// try {
@@ -39,8 +47,6 @@ export const actions = {
 		// 	});
 		// }
 
-		const userid = cookies.get('userid');
-		const title = data.get('title');
 		// let userToDos = [];
 		// try {
 		// 	userToDos = (await _todos.getTodos(userid)) ?? [];
@@ -63,12 +69,24 @@ export const actions = {
 		//!POST data
 		try {
 			const response = await _todos.createTodo(userid, title);
+
+			//? use this to redirect after successful submited
+			//throw redirect(303, '/');
+
+			//? use this return success type
 			return {
 				success: true,
 				todo: response
 			};
 		} catch (error) {
-			return fail(500, {
+			//? don't sure that will have better way to throw redirect on try..catch block
+			if (error.status) {
+				if (error.status >= 300 && error.status < 400) {
+					throw redirect(error.status, error.location);
+				}
+			}
+
+			throw fail(500, {
 				data: '',
 				internalErrors: error.message
 			});
@@ -84,7 +102,7 @@ export const actions = {
 				todo: response
 			};
 		} catch (error) {
-			return fail(500, {
+			throw fail(500, {
 				data: data.get('title'),
 				isDelete: true,
 				internalErrors: error.message

@@ -1,7 +1,8 @@
 <script>
 	import * as validator from '$lib/zod/validator.js';
-	import { enhance } from '$app/forms';
-	import { fail } from '@sveltejs/kit';
+	import { applyAction, enhance } from '$app/forms';
+	import { fly, slide } from 'svelte/transition';
+
 	/** @type {import('./$types').PageData} */
 	export let data;
 	/** @type {import('./$types').ActionData} */
@@ -9,6 +10,7 @@
 
 	let formErrors = {};
 	$: todosList = data.todos;
+	const userid = data.userid;
 
 	const onCreateSubmit = async ({ form, data, action, cancel }) => {
 		////! Before form submitted
@@ -27,20 +29,11 @@
 		formErrors = {};
 
 		//? zod validate
-		try {
-			validator.todoSchema.parse(formData);
-		} catch (err) {
+		const isValid = await validator.todoSchema.safeParseAsync(formData);
+		if (!isValid.success) {
 			cancel();
-			const { fieldErrors: errors } = err.flatten();
+			const { fieldErrors: errors } = isValid.error.flatten();
 			formErrors = { ...formErrors, ...errors };
-		}
-
-		if (!!todosList) {
-			if (todosList.find((todo) => todo.title === formData.title)) {
-				cancel();
-				const errors = { title: ['Title for todo must be unique.'] };
-				formErrors = { ...formErrors, ...errors };
-			}
 		}
 
 		//? `cancel()` will prevent the submission
@@ -49,9 +42,13 @@
 		////! After form submitted
 		return async ({ result, update }) => {
 			console.log('result', result);
-			if (result.status === 200) {
-				update();
+			if (result.type === 'success') {
+				form.reset();
 			}
+			if (result.type === 'error') {
+				await applyAction(result);
+			}
+			update();
 		};
 	};
 </script>
@@ -73,7 +70,7 @@
 
 <ul>
 	{#each data.todos as todo (todo.id)}
-		<li class="todo">
+		<li class="todo" in:fly={{ y: 20 }} out:slide>
 			<!-- use:enhance -->
 			<form method="POST" action="?/delete" use:enhance>
 				<input type="hidden" name="id" value={todo.id} />
