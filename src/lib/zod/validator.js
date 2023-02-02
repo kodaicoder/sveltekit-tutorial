@@ -9,19 +9,27 @@ export const todoSchema = z
 			.max(200)
 			.trim()
 	})
-	.transform((val) => val.title)
-	.refine(
-		async (title) => {
+	.superRefine(async (val, ctx) => {
+		try {
 			const { data } = await axios.get('/api/getToDo/');
 			if (data.length > 0) {
-				if (data.find((todo) => todo.title === title)) {
+				if (data.find((todo) => todo.title === val.title)) {
+					ctx.addIssue({
+						code: z.ZodIssueCode.custom,
+						message: 'Title for todo must be unique. 😡',
+						path: ['title']
+					});
 					return false;
 				}
 			}
 			return true;
-		},
-		{
-			message: 'Title for todo must be unique.',
-			path: ['title']
+		} catch ({ response }) {
+			ctx.addIssue({
+				code: z.ZodIssueCode.custom,
+				fatal: true,
+				message: 'Error-' + response.status + ' : ' + response.data.message,
+				path: ['title']
+			});
+			return false;
 		}
-	);
+	});

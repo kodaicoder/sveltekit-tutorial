@@ -1,12 +1,11 @@
 import * as _todos from '$lib/server/_todos.js';
 import { fail, redirect } from '@sveltejs/kit';
 import crypto from 'crypto';
-import * as validator from '$lib/zod/validator.js';
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load({ cookies }) {
-	const id = cookies.get('userid');
-	if (!id) {
+	const userid = cookies.get('userid');
+	if (!userid) {
 		cookies.set('userid', crypto.randomUUID(), {
 			path: '/',
 			httpOnly: true,
@@ -16,9 +15,9 @@ export async function load({ cookies }) {
 		});
 	}
 	try {
-		const response = (await _todos.getTodos(id)) ?? [];
+		const response = (await _todos.getTodos(userid)) ?? [];
 		return {
-			userid: id,
+			userid: userid,
 			todos: response
 		};
 	} catch (error) {
