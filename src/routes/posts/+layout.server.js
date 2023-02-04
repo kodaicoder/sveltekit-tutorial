@@ -1,5 +1,6 @@
 /** @type {import('./$types').PageServerLoad} */
 import axios from 'axios';
+const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
 export async function load(page) {
 	console.log(page);
@@ -10,6 +11,7 @@ export async function load(page) {
 	// const res = await fetch(apiUrl);
 	// const data = await res.json();
 
+	await delay(3000);
 	//! axios fetching
 	const { data } = await axios.get(apiUrl);
 

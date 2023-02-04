@@ -1,7 +1,7 @@
 <script>
 	import * as validator from '$lib/zod/validator.js';
 	import { applyAction, enhance } from '$app/forms';
-	import { fly, slide } from 'svelte/transition';
+	import { fly } from 'svelte/transition';
 
 	/** @type {import('./$types').PageData} */
 	export let data;
@@ -58,7 +58,7 @@
 <form method="POST" action="?/create" use:enhance={onCreateSubmit}>
 	<label>
 		add a todo:
-		<input name="title" />
+		<input name="title" class="input input-bordered border-2 w-full max-w-xs bg-base-100" />
 	</label>
 	{#if form?.errors?.title}
 		<label class="error">{form?.errors?.title[0]}</label>
@@ -70,7 +70,7 @@
 
 <ul>
 	{#each data.todos as todo (todo.id)}
-		<li class="todo" in:fly={{ y: 20 }} out:slide>
+		<li class="todo" in:fly={{ y: 20 }}>
 			<!-- use:enhance -->
 			<form method="POST" action="?/delete" use:enhance>
 				<input type="hidden" name="id" value={todo.id} />

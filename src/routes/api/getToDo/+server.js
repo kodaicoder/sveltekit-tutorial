@@ -1,5 +1,4 @@
-import { error } from '@sveltejs/kit';
-import { json } from '@sveltejs/kit';
+import { error, json } from '@sveltejs/kit';
 import * as _todos from '$lib/server/_todos.js';
 
 /** @type {import('../$types').RequestHandler} */

@@ -4,6 +4,8 @@ import { error } from '@sveltejs/kit';
 import { isEmpty } from 'lodash';
 import axios from 'axios';
 
+const delay = (ms) => new Promise((res) => setTimeout(res, ms));
+
 export async function load(page) {
 	//console.log(page);
 	const apiUrl = 'https://jsonplaceholder.typicode.com/posts/' + page.params.slug;
@@ -12,6 +14,7 @@ export async function load(page) {
 	//const res = await fetch(apiUrl);
 	//const data = await res.json();
 
+	await delay(3000);
 	//! axios fetching
 	const { data } = await axios.get(apiUrl);
 
