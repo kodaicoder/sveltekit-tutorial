@@ -13,7 +13,7 @@
 	});
 </script>
 
-<header class="sticky top-0">
+<header class="sticky top-0 z-20">
 	<div class="navbar bg-base-200 drop-shadow-lg mb-4">
 		<div>
 			<div class="dropdown">
@@ -27,6 +27,9 @@
 					<li><a class={currentPage == '/' ? 'active' : ''} href="/">Home</a></li>
 					<li><a class={currentPage == '/posts' ? 'active' : ''} href="/posts">Posts</a></li>
 					<li><a class={currentPage == '/todos' ? 'active' : ''} href="/todos">Todos</a></li>
+					<li>
+						<a class={currentPage == '/inputForm' ? 'active' : ''} href="/inputForm">Input Form</a>
+					</li>
 					<li tabindex="0">
 						<p class={currentPage == '/about' || currentPage == '/contact' ? 'active' : ''}>
 							More
@@ -41,9 +44,8 @@
 					</li>
 				</ul>
 			</div>
-			<a
-				class="link link-hover normal-case text-2xl font-semibold mx-10 hover:no-underline"
-				href="/">SvelteKit Walkthrough</a
+			<a class="link link-hover normal-case text-xl font-semibold mx-10 hover:no-underline" href="/"
+				>SvelteKit Walkthrough</a
 			>
 		</div>
 		<div class="navbar-center hidden md:flex">
@@ -51,6 +53,9 @@
 				<li><a class={currentPage == '/' ? 'active' : ''} href="/">Home</a></li>
 				<li><a class={currentPage == '/posts' ? 'active' : ''} href="/posts">Posts</a></li>
 				<li><a class={currentPage == '/todos' ? 'active' : ''} href="/todos">Todos</a></li>
+				<li>
+					<a class={currentPage == '/inputForm' ? 'active' : ''} href="/inputForm">Input Form</a>
+				</li>
 				<li tabindex="0">
 					<p class={currentPage == '/about' || currentPage == '/contact' ? 'active' : ''}>
 						More

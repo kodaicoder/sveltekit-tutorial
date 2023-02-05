@@ -1,3 +1,63 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/*#region FORM WITH FLOAT LABEL*/
+.form-floating {
+    @apply h-full relative
+}
+
+.form-floating label {
+    @apply absolute p-0 px-2 left-4 top-0 h-full duration-300 opacity-80 -z-10;
+}
+
+.form-floating textarea~label {
+    @apply top-3 h-auto;
+}
+
+
+.form-floating input:disabled~label,
+.form-floating textarea:disabled~label,
+.form-floating select:disabled~label {
+    @apply z-0 cursor-not-allowed;
+}
+
+.form-floating input,
+.form-floating textarea {
+    @apply bg-transparent;
+}
+
+.form-floating input:focus~label,
+.form-floating input:not(:placeholder-shown)~label,
+.form-floating select:focus~label,
+.form-floating select:not([value='']):valid~label {
+    @apply transform scale-90 -translate-y-[60%] left-2 z-0 bg-[hsl(var(--b1))] opacity-100 h-fit;
+}
+
+.form-floating textarea:focus~label,
+.form-floating textarea:not(:placeholder-shown)~label {
+    @apply transform scale-90 -translate-y-[110%] left-3 z-0 bg-[hsl(var(--b1))] opacity-100 h-fit;
+}
+
+/* .form-floating input:focus~label,
+.form-floating select:focus~label {
+    @apply left-2 z-0 bg-[hsl(var(--b1))] opacity-100 h-fit;
+} */
+
+.input-group .form-floating>*,
+.input-group .form-floating>.input,
+.input-group .form-floating>.textarea,
+.input-group .form-floating>.select {
+    @apply rounded-none
+}
+
+.input-group :last-child.form-floating :first-child {
+    @apply rounded-l-none rounded-r-md
+}
+
+.input-group :first-child.form-floating :first-child {
+    @apply rounded-r-none rounded-l-md
+}
+
+
+/*#endregion FORM WITH FLOAT LABEL*/

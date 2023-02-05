@@ -1,4 +1,4 @@
-<footer>
+<footer class="z-20">
 	<div class="navbar bg-base-200 shadow-2xl shadow-inner h-10 min-h-max px-8">
 		<div class="flex-1" />
 		<div class="navbar-end flex-none">
