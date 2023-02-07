@@ -5,7 +5,7 @@
 </script>
 
 <div class="flex">
-	<div class="form-control w-full max-w-xs my-8 mx-4 h-full">
+	<div class="form-control w-full max-w-xs my-8 mx-4 ">
 		<div class="form-floating">
 			<input
 				name="normal-input"
@@ -17,7 +17,7 @@
 		</div>
 	</div>
 
-	<div class="form-control w-full max-w-xs my-8 mx-4 h-full">
+	<div class="form-control w-full max-w-xs my-8 mx-4 ">
 		<div class="form-floating">
 			<input
 				name="disabled-input"
@@ -30,7 +30,7 @@
 		</div>
 	</div>
 
-	<div class="form-control w-full max-w-xs my-8 mx-4 relative h-full">
+	<div class="form-control w-full max-w-xs my-8 mx-4 relative ">
 		<div class="form-floating">
 			<input
 				name="large-input"
@@ -43,7 +43,7 @@
 	</div>
 </div>
 <div class="flex">
-	<div class="form-control w-full max-w-xs my-8 mx-4 h-full">
+	<div class="form-control w-full max-w-xs my-8 mx-4 ">
 		<div class="input-group ">
 			<span>Email</span>
 			<div class="form-floating">
@@ -53,7 +53,7 @@
 		</div>
 	</div>
 
-	<div class="form-control w-full max-w-xs my-8 mx-4 h-full">
+	<div class="form-control w-full max-w-xs my-8 mx-4 ">
 		<div class="input-group ">
 			<div class="form-floating">
 				<input name="group-input-r" placeholder=" " type="text" class="input input-bordered" />
@@ -63,7 +63,7 @@
 		</div>
 	</div>
 
-	<div class="form-control w-full max-w-xs my-8 mx-4 h-full">
+	<div class="form-control w-full max-w-xs my-8 mx-4 ">
 		<div class="input-group ">
 			<span>price</span>
 			<div class="form-floating">
@@ -76,7 +76,7 @@
 </div>
 
 <div class="flex">
-	<div class="form-control w-full max-w-xs my-8 mx-4 h-full">
+	<div class="form-control w-full max-w-xs my-8 mx-4 ">
 		<div class="input-group">
 			<div class="form-floating">
 				<input name="group-input-btn" placeholder=" " type="text" class="input input-bordered" />
@@ -88,11 +88,11 @@
 		</div>
 	</div>
 
-	<div class="form-control w-full max-w-xs my-8 mx-4 h-full">
+	<div class="form-control w-full max-w-xs my-8 mx-4 ">
 		<div class="input-group">
 			<div class="form-floating">
 				<select name="group-select-btn" class="select select-bordered w-full max-w-xs">
-					<option value="" selected disabled hidden>Please select</option>
+					<option value="" selected>Please select</option>
 					<option value="1">Option 1</option>
 					<option value="2">Option 2</option>
 					<option value="3">Option 3</option>
@@ -104,7 +104,7 @@
 			<button class="btn">Go</button>
 		</div>
 	</div>
-	<div class="form-control w-full max-w-xs my-8 mx-4 h-full">
+	<div class="form-control w-full max-w-xs my-8 mx-4 ">
 		<div class="form-floating">
 			<textarea class="textarea textarea-bordered" placeholder=" " />
 			<label for="group-input-btn" class="label"> Bio </label>

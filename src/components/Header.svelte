@@ -27,9 +27,14 @@
 					<li><a class={currentPage == '/' ? 'active' : ''} href="/">Home</a></li>
 					<li><a class={currentPage == '/posts' ? 'active' : ''} href="/posts">Posts</a></li>
 					<li><a class={currentPage == '/todos' ? 'active' : ''} href="/todos">Todos</a></li>
+
 					<li>
 						<a class={currentPage == '/inputForm' ? 'active' : ''} href="/inputForm">Input Form</a>
 					</li>
+					<li>
+						<a class={currentPage == '/register' ? 'active' : ''} href="/register">Register</a>
+					</li>
+
 					<li tabindex="0">
 						<p class={currentPage == '/about' || currentPage == '/contact' ? 'active' : ''}>
 							More
@@ -44,8 +49,9 @@
 					</li>
 				</ul>
 			</div>
-			<a class="link link-hover normal-case text-xl font-semibold mx-10 hover:no-underline" href="/"
-				>SvelteKit Walkthrough</a
+			<a
+				class="link link-hover normal-case text-xl font-semibold mx-10 hover:no-underline whitespace-nowrap"
+				href="/">SvelteKit Walkthrough</a
 			>
 		</div>
 		<div class="navbar-center hidden md:flex">
@@ -55,6 +61,9 @@
 				<li><a class={currentPage == '/todos' ? 'active' : ''} href="/todos">Todos</a></li>
 				<li>
 					<a class={currentPage == '/inputForm' ? 'active' : ''} href="/inputForm">Input Form</a>
+				</li>
+				<li>
+					<a class={currentPage == '/register' ? 'active' : ''} href="/register">Register</a>
 				</li>
 				<li tabindex="0">
 					<p class={currentPage == '/about' || currentPage == '/contact' ? 'active' : ''}>
