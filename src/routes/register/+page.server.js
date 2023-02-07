@@ -7,6 +7,7 @@ export async function load() {
 export const actions = {
 	default: async ({ request }) => {
 		const formData = Object.fromEntries(await request.formData());
+		console.log('SERVER SIDE HIT !!!');
 		console.log(formData);
 	}
 };

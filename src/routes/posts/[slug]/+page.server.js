@@ -1,7 +1,7 @@
 /** @type {import('./$types').PageServerLoad} */
 import { error } from '@sveltejs/kit';
 //? using lodash check object is empty ?
-import _ from 'lodash';
+import isEmpty from 'lodash/isEmpty';
 import axios from 'axios';
 
 const delay = (ms) => new Promise((res) => setTimeout(res, ms));
@@ -35,7 +35,7 @@ export async function load(page) {
 	//? always executed
 	// });
 
-	if (_.isEmpty(data)) throw error(404);
+	if (isEmpty(data)) throw error(404);
 	return {
 		post: data
 	};
