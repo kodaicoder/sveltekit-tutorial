@@ -34,26 +34,60 @@ export const todoSchema = z
 		}
 	});
 
-export const registerSchema = z.object({
-	name: z
-		.string({ required_error: 'Name is required.' })
-		.min(1, { message: 'Name is required.' })
-		.max(64, { message: 'Name must be at most 64 characters' })
-		.trim(),
-	email: z
-		.string({ required_error: 'Email is required.' })
-		.min(1, { message: 'Email is required.' })
-		.max(64, { message: 'Email must be at most 64 characters' })
-		.email(),
-	password: z
-		.string({ required_error: 'Password is required.' })
-		.min(6, { message: 'Password must be at least 6 characters.' })
-		.max(32, { message: 'Password must be at most 32 characters.' })
-		.trim(),
-	passwordConfirm: z
-		.string({ required_error: 'Confirm password is required.' })
-		.min(6, { message: 'Confirm password must be at least 6 characters.' })
-		.max(32, { message: 'Confirm password must be at most 32 characters.' })
-		.trim(),
-	terms: z.enum(['on'], { required_error: 'You must accept the terms and conditions.' })
-});
+export const registerSchema = z
+	.object({
+		name: z
+			.string({ required_error: 'Name is required.' })
+			.min(1, { message: 'Name is required.' })
+			.max(64, { message: 'Name must be at most 64 characters' })
+			.trim(),
+		email: z
+			.string({ required_error: 'Email is required.' })
+			.min(1, { message: 'Email is required.' })
+			.max(64, { message: 'Email must be at most 64 characters' })
+			.email(),
+		password: z
+			.string({ required_error: 'Password is required.' })
+			.min(6, { message: 'Password must be at least 6 characters.' })
+			.max(32, { message: 'Password must be at most 32 characters.' })
+			.trim(),
+		passwordConfirm: z
+			.string({ required_error: 'Confirm password is required.' })
+			.min(6, { message: 'Confirm password must be at least 6 characters.' })
+			.max(32, { message: 'Confirm password must be at most 32 characters.' })
+			.trim(),
+
+		terms: z.enum(['true'], {
+			errorMap: () => ({ message: 'You must accept the terms and conditions.' })
+		})
+	})
+	.superRefine(async ({ password, passwordConfirm }, ctx) => {
+		if (passwordConfirm !== password) {
+			ctx.addIssue({
+				code: z.ZodIssueCode.custom,
+				message: 'Password and Confirm password must match!',
+				path: ['password']
+			});
+			ctx.addIssue({
+				code: z.ZodIssueCode.custom,
+				message: 'Password and Confirm password must match!',
+				path: ['passwordConfirm']
+			});
+			return false;
+		}
+	});
+
+export const zodValidator = async (formObj, schema) => {
+	const isValid = await schema.safeParseAsync(formObj);
+	if (!isValid.success) {
+		// const { fieldErrors: errors } = isValid.error.flatten();
+		const fieldErrors = isValid.error.issues.reduce(
+			(res, value) => ({
+				[value.path]: value.message,
+				...res
+			}),
+			{}
+		);
+		return fieldErrors;
+	}
+};

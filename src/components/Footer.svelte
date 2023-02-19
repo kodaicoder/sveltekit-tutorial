@@ -17,17 +17,9 @@
 	footer {
 		position: fixed;
 		bottom: 0;
-		width: 100vw;
+		width: 100%;
 		margin: 0;
 	}
-	/* footer > p {
-		height: 100%;
-		display: flex;
-		margin: 0;
-		align-items: center;
-		justify-content: flex-end;
-		
-	} */
 	footer a {
 		text-decoration: none;
 	}

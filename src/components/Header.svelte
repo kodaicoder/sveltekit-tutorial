@@ -1,16 +1,7 @@
 <script>
-	import { onMount } from 'svelte';
-	import { themeChange } from 'theme-change';
-	import { theme } from '$lib/stores/themeStore';
+	import ThemeChanger from './ThemeChanger.svelte';
 	import Icon from '@iconify/svelte';
 	import { page } from '$app/stores';
-	$: currentPage = $page.route.id;
-	$: isLightTheme = $theme === 'emerald';
-
-	//require for themeChange
-	onMount(() => {
-		themeChange(false);
-	});
 </script>
 
 <header class="sticky top-0 z-20">
@@ -24,26 +15,75 @@
 					tabindex="0"
 					class="menu menu-compact dropdown-content  p-2 shadow  bg-base-200 rounded-box w-52"
 				>
-					<li><a class={currentPage == '/' ? 'active' : ''} href="/">Home</a></li>
-					<li><a class={currentPage == '/posts' ? 'active' : ''} href="/posts">Posts</a></li>
-					<li><a class={currentPage == '/todos' ? 'active' : ''} href="/todos">Todos</a></li>
-
+					<li><a class={$page.url.pathname === '/' ? 'active' : ''} href="/">Home</a></li>
 					<li>
-						<a class={currentPage == '/inputForm' ? 'active' : ''} href="/inputForm">Input Form</a>
+						<a class={$page.url.pathname === '/posts' ? 'active' : ''} href="/posts">Posts</a>
 					</li>
 					<li>
-						<a class={currentPage == '/register' ? 'active' : ''} href="/register">Register</a>
+						<a class={$page.url.pathname === '/todos' ? 'active' : ''} href="/todos">Todos</a>
+					</li>
+
+					<li>
+						<a class={$page.url.pathname === '/inputForm' ? 'active' : ''} href="/inputForm"
+							>Input Form</a
+						>
 					</li>
 
 					<li tabindex="0">
-						<p class={currentPage == '/about' || currentPage == '/contact' ? 'active' : ''}>
+						<p
+							class={$page.url.pathname === '/registerZod' ||
+							$page.url.pathname === '/registerYup' ||
+							$page.url.pathname === '/registerFelte' ||
+							$page.url.pathname === '/registerYupStore'
+								? 'active'
+								: ''}
+						>
+							Register Form
+							<Icon icon="material-symbols:arrow-back-ios-new-rounded" rotate={3} />
+						</p>
+						<ul class="p-2  bg-base-200 ">
+							<li>
+								<a class={$page.url.pathname === '/registerZod' ? 'active' : ''} href="/registerZod"
+									>Register with Zod</a
+								>
+							</li>
+							<li>
+								<a class={$page.url.pathname === '/registerYup' ? 'active' : ''} href="/registerYup"
+									>Register with Yup</a
+								>
+							</li>
+							<li>
+								<a
+									class={$page.url.pathname === '/registerYupStore' ? 'active' : ''}
+									href="/registerYupStore">Register with Yup and Store</a
+								>
+							</li>
+							<li>
+								<a
+									class={$page.url.pathname === '/registerFelte' ? 'active' : ''}
+									href="/registerFelte">Register with Felte</a
+								>
+							</li>
+						</ul>
+					</li>
+
+					<li tabindex="1">
+						<p
+							class={$page.url.pathname === '/about' || $page.url.pathname === '/contact'
+								? 'active'
+								: ''}
+						>
 							More
 							<Icon icon="material-symbols:arrow-back-ios-rounded" rotate={2} />
 						</p>
 						<ul class="p-2 bg-base-200">
-							<li><a class={currentPage == '/about' ? 'active' : ''} href="/about">About</a></li>
 							<li>
-								<a class={currentPage == '/contact' ? 'active' : ''} href="/contact">Contact</a>
+								<a class={$page.url.pathname === '/about' ? 'active' : ''} href="/about">About</a>
+							</li>
+							<li>
+								<a class={$page.url.pathname === '/contact' ? 'active' : ''} href="/contact"
+									>Contact</a
+								>
 							</li>
 						</ul>
 					</li>
@@ -56,39 +96,77 @@
 		</div>
 		<div class="navbar-center hidden md:flex">
 			<ul class="menu menu-horizontal px-1 text-lg">
-				<li><a class={currentPage == '/' ? 'active' : ''} href="/">Home</a></li>
-				<li><a class={currentPage == '/posts' ? 'active' : ''} href="/posts">Posts</a></li>
-				<li><a class={currentPage == '/todos' ? 'active' : ''} href="/todos">Todos</a></li>
+				<li><a class={$page.url.pathname === '/' ? 'active' : ''} href="/">Home</a></li>
+				<li><a class={$page.url.pathname === '/posts' ? 'active' : ''} href="/posts">Posts</a></li>
+				<li><a class={$page.url.pathname === '/todos' ? 'active' : ''} href="/todos">Todos</a></li>
 				<li>
-					<a class={currentPage == '/inputForm' ? 'active' : ''} href="/inputForm">Input Form</a>
+					<a class={$page.url.pathname === '/inputForm' ? 'active' : ''} href="/inputForm"
+						>Input Form</a
+					>
 				</li>
-				<li>
-					<a class={currentPage == '/register' ? 'active' : ''} href="/register">Register</a>
-				</li>
+
 				<li tabindex="0">
-					<p class={currentPage == '/about' || currentPage == '/contact' ? 'active' : ''}>
+					<p
+						class={$page.url.pathname === '/registerZod' ||
+						$page.url.pathname === '/registerYup' ||
+						$page.url.pathname === '/registerFelte' ||
+						$page.url.pathname === '/registerYupStore'
+							? 'active'
+							: ''}
+					>
+						Register Form
+						<Icon icon="material-symbols:arrow-back-ios-new-rounded" rotate={3} />
+					</p>
+					<ul class="p-2  bg-base-200 ">
+						<li>
+							<a class={$page.url.pathname === '/registerZod' ? 'active' : ''} href="/registerZod"
+								>Register with Zod</a
+							>
+						</li>
+						<li>
+							<a class={$page.url.pathname === '/registerYup' ? 'active' : ''} href="/registerYup"
+								>Register with Yup</a
+							>
+						</li>
+						<li>
+							<a
+								class={$page.url.pathname === '/registerYupStore' ? 'active' : ''}
+								href="/registerYupStore">Register with Yup and Store</a
+							>
+						</li>
+
+						<li>
+							<a
+								class={$page.url.pathname === '/registerFelte' ? 'active' : ''}
+								href="/registerFelte">Register with Felte</a
+							>
+						</li>
+					</ul>
+				</li>
+				<li tabindex="1">
+					<p
+						class={$page.url.pathname === '/about' || $page.url.pathname === '/contact'
+							? 'active'
+							: ''}
+					>
 						More
 						<Icon icon="material-symbols:arrow-back-ios-new-rounded" rotate={3} />
 					</p>
 					<ul class="p-2  bg-base-200 ">
-						<li><a class={currentPage == '/about' ? 'active' : ''} href="/about">About</a></li>
 						<li>
-							<a class={currentPage == '/contact' ? 'active' : ''} href="/contact">Contact</a>
+							<a class={$page.url.pathname === '/about' ? 'active' : ''} href="/about">About</a>
+						</li>
+						<li>
+							<a class={$page.url.pathname === '/contact' ? 'active' : ''} href="/contact"
+								>Contact</a
+							>
 						</li>
 					</ul>
 				</li>
 			</ul>
 		</div>
 		<div class="navbar-end flex">
-			<Icon icon="ph:sun-duotone" width="20" height="20" inline={true} class="mx-3" />
-			<input
-				type="checkbox"
-				class="toggle"
-				data-toggle-theme="emerald,luxury"
-				data-act-class="ACTIVECLASS"
-				checked={!isLightTheme}
-			/>
-			<Icon icon="ph:moon-duotone" width="20" height="20" inline={true} class="mx-3" />
+			<ThemeChanger />
 		</div>
 	</div>
 </header>

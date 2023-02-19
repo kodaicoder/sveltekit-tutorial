@@ -6,6 +6,8 @@
 	import { loader } from '$lib/stores/loadStateStore';
 	import Loader from '$components/loader/Loader.svelte';
 	$: loader.navigateLoader(!!$navigating);
+
+	
 </script>
 
 <Header />
@@ -27,3 +29,4 @@
 		margin: 0 4rem 3rem 4rem;
 	}
 </style>
+
