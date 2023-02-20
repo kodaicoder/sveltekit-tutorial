@@ -1,6 +1,7 @@
 <script>
 	import ThemeChanger from './ThemeChanger.svelte';
-	import Icon from '@iconify/svelte';
+	import Icon from '@iconify/svelte/dist/OfflineIcon.svelte';
+	import '$lib/icons/bundle.js'
 	import { page } from '$app/stores';
 </script>
 
@@ -9,7 +10,7 @@
 		<div>
 			<div class="dropdown">
 				<label tabindex="0" class="btn btn-ghost md:hidden">
-					<Icon icon="ion:menu" width="30" height="30" />
+					<Icon icon="ph:list-bold" width="30" height="30" />
 				</label>
 				<ul
 					tabindex="0"
@@ -39,7 +40,7 @@
 								: ''}
 						>
 							Register Form
-							<Icon icon="material-symbols:arrow-back-ios-new-rounded" rotate={3} />
+							<Icon icon="ph:caret-down-bold" rotate={3} />
 						</p>
 						<ul class="p-2  bg-base-200 ">
 							<li>
@@ -74,7 +75,7 @@
 								: ''}
 						>
 							More
-							<Icon icon="material-symbols:arrow-back-ios-rounded" rotate={2} />
+							<Icon icon="ph:caret-down-bold" rotate={3} />
 						</p>
 						<ul class="p-2 bg-base-200">
 							<li>
@@ -115,7 +116,7 @@
 							: ''}
 					>
 						Register Form
-						<Icon icon="material-symbols:arrow-back-ios-new-rounded" rotate={3} />
+						<Icon icon="ph:caret-down-bold"/>
 					</p>
 					<ul class="p-2  bg-base-200 ">
 						<li>
@@ -150,7 +151,7 @@
 							: ''}
 					>
 						More
-						<Icon icon="material-symbols:arrow-back-ios-new-rounded" rotate={3} />
+						<Icon icon="ph:caret-down-bold"/>
 					</p>
 					<ul class="p-2  bg-base-200 ">
 						<li>
@@ -166,7 +167,7 @@
 			</ul>
 		</div>
 		<div class="navbar-end flex">
-			<ThemeChanger />
+			<ThemeChanger lightTheme='emerald'  darkTheme='luxury'/>
 		</div>
 	</div>
 </header>

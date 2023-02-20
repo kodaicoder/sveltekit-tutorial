@@ -40,7 +40,7 @@
 	<label for={name} class="label"> {labelText} </label>
 	{#if !!errorMessage && (isTouched || isSubmitted)}
 		<div class="flex items-center absolute py-1 px-2 whitespace-nowrap text-error">
-			<Icon class="mx-2" icon="material-symbols:warning-rounded" />
+			<Icon class="mx-2" icon="ph:warning-fill" />
 			<span>{errorMessage}</span>
 		</div>
 	{/if}

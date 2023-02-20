@@ -38,7 +38,7 @@
 
 {#if !!errorMessage && (isTouched || isSubmitted)}
 	<div class="flex items-center absolute px-2 whitespace-nowrap text-error">
-		<Icon class="mx-2" icon="material-symbols:warning-rounded" />
+		<Icon class="mx-2" icon="ph:warning-fill" />
 		<span>{errorMessage}</span>
 	</div>
 {/if}
